@@ -1,0 +1,37 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Clicks : MonoBehaviour {
+    public int clicks = 0;
+    public bool IsFinished = false;
+
+	void Update ()
+    {
+        if (IsFinished == false)
+        {
+            numerocomp();
+            StartCoroutine(numero());
+        } else
+        {
+            Debug.LogErrorFormat("Tus clicks fueron: " + clicks);
+            StopAllCoroutines();
+        }
+	}
+    IEnumerator numero()
+    {
+        for (int x = 10; x >= 0; x--)
+        {
+            yield return new WaitForSeconds(1f);
+            Debug.Log("Segundos restantes: " + x);
+        }
+        IsFinished = true;
+    }
+    void numerocomp()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            clicks = clicks + 1;
+        }
+    }
+}
